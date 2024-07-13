@@ -1,0 +1,50 @@
+debug: false
+server:
+  port: 8081
+spring:
+  application:
+    name: demo-websocket-stomp
+  devtools:
+    livereload:
+      enabled: true
+      port: 35729
+management:
+  security:
+    enabled: false
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        pushgateway:
+          # 启用推送
+          enabled: true
+          #pushgateway地址
+          baseUrl: http://10.5.67.172:9091
+          # 推送周期 s m d
+          pushRate: 5s
+          # job定义名
+          job: ${spring.application.name}
+          shutdown-operation: push
+      jmx:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#        exclude: env,beans
+#      base-path: /metrics
+
+logging:
+  config: classpath:config/logback-spring.xml
+#  register-shutdown-hook: false
+#  pattern:
+#    console:
+#    file:
+#      base-path: /allmetric

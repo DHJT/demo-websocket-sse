@@ -1,0 +1,31 @@
+debug: false
+spring:
+  application:
+    name: demo-websocket-stomp
+  devtools:
+    livereload:
+      enabled: true
+      port: 35729
+#management.metrics.tags.application=${spring.application.name}
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+      jmx:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#logging:
+#  config: classpath:config/logback-spring.xml
+#  register-shutdown-hook: false
+#  pattern:
+#    console:
+#    file:
+#      base-path: /allmetric
+server:
+  port: 8083
